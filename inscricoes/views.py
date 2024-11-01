@@ -64,6 +64,7 @@ def curso_list(request):
     with connection.cursor() as cursor:
         cursor.execute("SELECT * FROM Curso")
         cursos = cursor.fetchall()
+    print(cursos)
     return render(request, 'inscricoes/curso_list.html', {'cursos': cursos})
 
 def curso_create(request):

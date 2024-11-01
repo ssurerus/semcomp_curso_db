@@ -1,0 +1,53 @@
+<!-- inscricoes/templates/inscricoes/base.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Banco de Dados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Curso DB</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inscricao_list' %}">Inscrições</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'curso_list' %}">Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inscricao_create' %}">Nova Inscrição</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'curso_create' %}">Novo Curso</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Curso de Banco de Dados © 2024</span>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

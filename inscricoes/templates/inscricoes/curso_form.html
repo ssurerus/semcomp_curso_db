@@ -1,9 +1,20 @@
 <!-- inscricoes/templates/inscricoes/curso_form.html -->
 
-<h2>{% if form.instance.id %}Editar{% else %}Adicionar{% endif %} Curso</h2>
+{% extends 'inscricoes/base.html' %}
+
+{% block content %}
+<h2>{% if curso %}Editar{% else %}Adicionar{% endif %} Curso</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
+    <div class="form-group">
+        <label for="nome">Nome do Curso:</label>
+        <input type="text" name="nome" class="form-control" value="{% if curso %}{{ curso.nome }}{% endif %}" required>
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição do Curso:</label>
+        <textarea name="descricao" class="form-control" required>{% if curso %}{{ curso.descricao }}{% endif %}</textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
 </form>
-<a href="{% url 'curso_list' %}">Voltar</a>
+<a href="{% url 'curso_list' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

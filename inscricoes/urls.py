@@ -2,10 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('inscricoes/', views.inscricao_list, name='inscricao_list'),
-    path('inscricoes/nova/', views.inscricao_create, name='inscricao_create'),
-    path('inscricoes/editar/<int:id>/', views.inscricao_update, name='inscricao_update'),
-    path('inscricoes/deletar/<int:id>/', views.inscricao_delete, name='inscricao_delete'),
+    path('', views.inscricao_list, name='inscricao_list'),
+    path('nova/', views.inscricao_create, name='inscricao_create'),
+    path('editar/<int:id>/', views.inscricao_update, name='inscricao_update'),
+    path('deletar/<int:id>/', views.inscricao_delete, name='inscricao_delete'),
     # Rotas para cursos semelhantes
 
 

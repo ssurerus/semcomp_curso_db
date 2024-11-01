@@ -1,13 +1,20 @@
 <!-- inscricoes/templates/inscricoes/curso_list.html -->
 
+{% extends 'inscricoes/base.html' %}
+
+{% block content %}
 <h2>Lista de Cursos</h2>
-<a href="{% url 'curso_create' %}">Adicionar Novo Curso</a>
-<ul>
+<a href="{% url 'curso_create' %}" class="btn btn-primary">Adicionar Novo Curso</a>
+<ul class="list-group mt-3">
     {% for curso in cursos %}
-        <li>
-            {{ curso.1 }} - {{ curso.2 }}
-            <a href="{% url 'curso_update' curso.0 %}">Editar</a>
-            <a href="{% url 'curso_delete' curso.0 %}">Deletar</a>
+        <li class="list-group-item">
+            <strong>Nome:</strong> {{ curso.1 }} <br>
+            <strong>Descrição:</strong> {{ curso.2 }} <br>
+            <a href="{% url 'curso_update' curso.0 %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'curso_delete' curso.0 %}" class="btn btn-danger btn-sm">Deletar</a>
         </li>
+    {% empty %}
+        <li class="list-group-item">Não há cursos registrados.</li>
     {% endfor %}
 </ul>
+{% endblock %}
