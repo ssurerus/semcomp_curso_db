@@ -1,0 +1,9 @@
+<!-- inscricoes/templates/inscricoes/curso_delete.html -->
+
+<h2>Deletar Curso</h2>
+<p>Tem certeza de que deseja excluir este curso?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar</button>
+    <a href="{% url 'curso_list' %}">Cancelar</a>
+</form>

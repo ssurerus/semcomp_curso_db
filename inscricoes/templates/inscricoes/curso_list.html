@@ -1,0 +1,13 @@
+<!-- inscricoes/templates/inscricoes/curso_list.html -->
+
+<h2>Lista de Cursos</h2>
+<a href="{% url 'curso_create' %}">Adicionar Novo Curso</a>
+<ul>
+    {% for curso in cursos %}
+        <li>
+            {{ curso.1 }} - {{ curso.2 }}
+            <a href="{% url 'curso_update' curso.0 %}">Editar</a>
+            <a href="{% url 'curso_delete' curso.0 %}">Deletar</a>
+        </li>
+    {% endfor %}
+</ul>

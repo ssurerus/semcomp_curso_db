@@ -1,0 +1,9 @@
+<!-- inscricoes/templates/inscricoes/curso_form.html -->
+
+<h2>{% if form.instance.id %}Editar{% else %}Adicionar{% endif %} Curso</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+<a href="{% url 'curso_list' %}">Voltar</a>

@@ -1,0 +1,15 @@
+<!-- inscricoes/templates/inscricoes/inscricao_list.html -->
+
+<h2>Lista de Inscrições</h2>
+<a href="{% url 'inscricao_create' %}">Adicionar Nova Inscrição</a>
+<ul>
+    {% for inscricao in inscricoes %}
+        <li>
+            Nome: {{ inscricao.1 }} | Matrícula: {{ inscricao.2 }} | Email: {{ inscricao.3 }} | Curso: {{ inscricao.4 }}
+            <a href="{% url 'inscricao_update' inscricao.0 %}">Editar</a>
+            <a href="{% url 'inscricao_delete' inscricao.0 %}">Deletar</a>
+        </li>
+    {% empty %}
+        <li>Não há inscrições registradas.</li>
+    {% endfor %}
+</ul>

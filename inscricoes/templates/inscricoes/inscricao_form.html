@@ -1,0 +1,24 @@
+<!-- inscricoes/templates/inscricoes/inscricao_form.html -->
+
+<h2>{% if inscricao %}Editar{% else %}Adicionar{% endif %} Inscrição</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="nome_completo">Nome Completo:</label>
+    <input type="text" name="nome_completo" value="{% if inscricao %}{{ inscricao.1 }}{% endif %}" required><br>
+    
+    <label for="matricula">Matrícula:</label>
+    <input type="text" name="matricula" value="{% if inscricao %}{{ inscricao.2 }}{% endif %}" required><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{% if inscricao %}{{ inscricao.3 }}{% endif %}" required><br>
+
+    <label for="curso_id">Curso:</label>
+    <select name="curso_id" id="curso_id" required>
+        {% for curso in cursos %}
+            <option value="{{ curso.0 }}"{% if inscricao and curso.0 == inscricao.4 %} selected{% endif %}>{{ curso.1 }}</option>
+        {% endfor %}
+    </select><br>
+
+    <button type="submit">Salvar</button>
+</form>
+<a href="{% url 'inscricao_list' %}">Voltar</a>

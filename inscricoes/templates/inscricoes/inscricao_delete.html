@@ -1,0 +1,9 @@
+<!-- inscricoes/templates/inscricoes/inscricao_delete.html -->
+
+<h2>Deletar Inscrição</h2>
+<p>Tem certeza de que deseja excluir esta inscrição?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar</button>
+    <a href="{% url 'inscricao_list' %}">Cancelar</a>
+</form>
