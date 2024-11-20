@@ -3,16 +3,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import InscricaoForm, CursoForm
 from .models import Inscricao, Curso
 
-# Inscrição - CREATE (SQL puro)
+# Listagem de inscrições, nessa função temos uma query que selciona todos os campos da tabela Inscricao junto com o nome do curso que o aluno está inscrito (JOIN) e retorna para nossa página HTML;
+#O JOIN é uma cláusula SQL que é usada para combinar linhas de duas ou mais tabelas, com base em um campo relacionado entre elas.
 def inscricao_list(request):
     with connection.cursor() as cursor:
+        #Query de seleção -> 
         cursor.execute("SELECT i.id, i.nome_completo, i.matricula, i.email, c.nome FROM Inscricao i JOIN Curso c ON i.curso_id = c.id")
         inscricoes = cursor.fetchall()
     return render(request, 'inscricoes/inscricao_list.html', {'inscricoes': inscricoes})
 
+#Criação de inscrições, nessa função temos a seleção de todos os cursos inicialmente para que eles possam ser associados a uma inscrição, e caso o método seja POST, ou seja, o usuário tenha preenchido o formulário e clicado em enviar, os dados são inseridos na tabela Inscricao e o usuário é redirecionado para a página de listagem de inscrições.
 def inscricao_create(request):
     cursos = []
     with connection.cursor() as cursor:
+        #Query de seleção de cursos->
         cursor.execute("SELECT * FROM Curso")
         cursos = cursor.fetchall()
 
@@ -23,14 +27,17 @@ def inscricao_create(request):
         curso_id = request.POST['curso_id']
 
         with connection.cursor() as cursor:
+            #Query de inserção de inscrição ->
             cursor.execute("INSERT INTO Inscricao (nome_completo, matricula, email, curso_id) VALUES (%s, %s, %s, %s)", [nome, matricula, email, curso_id])
         return redirect('inscricao_list')
     
     return render(request, 'inscricoes/inscricao_form.html', {'cursos': cursos})
 
+#Edição de inscrições, nessa função temos a seleção de todos os cursos inicialmente para que eles possam ser associados a uma inscrição, e caso o método seja POST, ou seja, o usuário tenha preenchido o formulário e clicado em enviar, os dados são atualizados na tabela Inscricao e o usuário é redirecionado para a página de listagem de inscrições.
 def inscricao_update(request, id):
     cursos = []
     with connection.cursor() as cursor:
+        #Query de seleção de cursos->
         cursor.execute("SELECT * FROM Curso")
         cursos = cursor.fetchall()
     
@@ -41,15 +48,19 @@ def inscricao_update(request, id):
         curso_id = request.POST['curso_id']
 
         with connection.cursor() as cursor:
+            #Query de atualização de inscrição ->
             cursor.execute("UPDATE Inscricao SET nome_completo = %s, matricula = %s, email = %s, curso_id = %s WHERE id = %s", [nome, matricula, email, curso_id, id])
         return redirect('inscricao_list')
     
     with connection.cursor() as cursor:
+        #Query de seleção de inscrição ->
         cursor.execute("SELECT * FROM Inscricao WHERE id = %s", [id])
         inscricao = cursor.fetchone()
 
     return render(request, 'inscricoes/inscricao_form.html', {'inscricao': inscricao, 'cursos': cursos})
 
+
+#Deleção de inscrições, nessa função temos a deleção de uma inscrição com base no id passado como parâmetro, e caso o método seja POST, ou seja, o usuário tenha clicado em confirmar a deleção, a inscrição é deletada da tabela Inscricao e o usuário é redirecionado para a página de listagem de inscrições.
 def inscricao_delete(request, id):
     if request.method == 'POST':
         with connection.cursor() as cursor:
@@ -58,7 +69,7 @@ def inscricao_delete(request, id):
     
     return render(request, 'inscricoes/inscricao_delete.html', {'id': id})
 
-# Similar para CRUD de Cursos (CREATE, READ, UPDATE, DELETE)
+# Similar as funções de inscrição, porém com a tabela Curso
 
 def curso_list(request):
     with connection.cursor() as cursor:

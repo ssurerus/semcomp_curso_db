@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'curso_introdb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+#Dados para a conexão com o banco de dados
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

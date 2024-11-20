@@ -19,5 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('inscricoes/', include('inscricoes.urls')),
+
+    #Define o "caminho" para as URLs da aplicação de inscricoes, no caso a página inicial da nossa aplicação localhost:8000/
+    path('', include('inscricoes.urls')),
 ]
