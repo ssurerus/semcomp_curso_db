@@ -16,7 +16,7 @@ Este repositório contém os arquivos utilizados no minicurso **Introdução ao 
 
 1. Clone este repositório:  
    ```bash
-   git clone [https://github.com/seu-usuario/minicurso-bancos-dados.git](https://github.com/ssurerus/semcomp_curso_db.git)
+   git clone https://github.com/ssurerus/semcomp_curso_db.git
    cd semcomp_curso_db
    python manage.py migrate
    python manage.py runserver  
